@@ -4,7 +4,6 @@ import { AuthContext } from "../Providers/AuthProvider";
 
 const Navbar = () => {
   const { name } = useContext(AuthContext);
-  console.log(name);
 
   const links = (
     <>
