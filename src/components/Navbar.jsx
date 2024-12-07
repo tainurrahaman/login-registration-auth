@@ -6,10 +6,10 @@ import auth from "../firebase_init";
 import Home from "./Home";
 
 const Navbar = () => {
-  const { user } = useContext(AuthContext);
+  const { user, signOutUser } = useContext(AuthContext);
 
   const handleLogout = () => {
-    signOut(auth)
+    signOutUser()
       .then(() => console.log("Signout successfully"))
       .catch((error) => console.log(error.message));
   };
@@ -25,6 +25,11 @@ const Navbar = () => {
       <li>
         <NavLink to="/registration">Registration</NavLink>
       </li>
+      {user && (
+        <li>
+          <NavLink to="/orders">Orders</NavLink>
+        </li>
+      )}
     </>
   );
   return (
