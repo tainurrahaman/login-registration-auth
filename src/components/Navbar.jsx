@@ -1,9 +1,18 @@
 import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
+import { signOut } from "firebase/auth";
+import auth from "../firebase_init";
+import Home from "./Home";
 
 const Navbar = () => {
-  const { name } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => console.log("Signout successfully"))
+      .catch((error) => console.log(error.message));
+  };
 
   const links = (
     <>
@@ -51,7 +60,20 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">{name}</a>
+        {user ? (
+          <>
+            <span>{user.email}</span>
+            <button onClick={handleLogout} className="btn">
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link className="btn" to="/login">
+              LogIn
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
