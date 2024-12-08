@@ -12,7 +12,6 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    console.log(email, password);
     // Login User
     logInUser(email, password)
       .then((result) => {

@@ -13,8 +13,6 @@ const Registration = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
 
-    console.log(name, email, password);
-
     // Create User
     createUser(email, password)
       .then((result) => {
